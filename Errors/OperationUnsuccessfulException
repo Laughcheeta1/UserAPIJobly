@@ -1,0 +1,9 @@
+class OperationUnsuccessfulException extends Error {
+    constructor(message) {
+        super(message || `The operation was unsuccessfull, try again later.`);
+        this.name = 'UnsuccessfullOperationException';
+        this.statusCode = 500;  // Internal Server Error
+    }
+}
+
+module.exports = OperationUnsuccessfulException;

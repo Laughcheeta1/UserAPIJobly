@@ -3,3 +3,4 @@ The User service is the API in charge of `Searching / Adding / Updating / Deleti
 - Extra information
 - Reviews
 - Active postulations
+- Certifications
