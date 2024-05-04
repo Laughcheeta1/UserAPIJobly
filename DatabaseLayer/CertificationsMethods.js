@@ -55,6 +55,10 @@ const getCertificationsMethods = (db) => {
 
     // TODO: add a method to update the outside certifications
     // TODO: add a method to delete the outside certifications
+    return {    
+        getOutsideCertificationsProvider,
+        addOutsideCertificationProvider
+    };
 };
 
 module.exports = getCertificationsMethods;
