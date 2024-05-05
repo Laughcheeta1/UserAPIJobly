@@ -9,7 +9,7 @@ const getExtraInfoMethods = (db) => {
             { 
                 "projection": 
                 { "extra_info" : 1 } 
-            });
+            });  // TODO: Make this not to return the id of the extra info, but only the name and description
         return extraInfo;
     };
 

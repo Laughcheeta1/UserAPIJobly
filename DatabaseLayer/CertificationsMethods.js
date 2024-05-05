@@ -8,7 +8,7 @@ const getCertificationsMethods = (db) => {
             { 
                 "projection": 
                 { "outside_certifications" : 1 } 
-            });
+            }); // TODO: Make this not to return the id of the certifications, but only the name, issuer, etc.
         return outsideCertifications;
     };
 

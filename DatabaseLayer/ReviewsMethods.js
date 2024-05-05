@@ -9,7 +9,7 @@ const getReviewsMethods = (db) => {
             { 
                 "projection": 
                 { "reviews" : 1 } 
-            });;
+            });  // TODO: Make this not to return the id of the reviews, but only the author, date, etc.
     };
 
     const addReviewProvider = async (db, dbId, review) => {
@@ -61,7 +61,7 @@ const getReviewsMethods = (db) => {
             { 
                 "projection": 
                 { "reviews" : 1 } 
-            });
+            });  // TODO: Make this not to return the id of the reviews, but only the author, date, etc.
     };
 
     const addReviewEmployer = async (db, dbId, review) => {
