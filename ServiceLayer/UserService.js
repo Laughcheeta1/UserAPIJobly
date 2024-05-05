@@ -1,4 +1,4 @@
-repositoryInitializer = require('../DatabaseLayer/RegisterRepository');
+repositoryInitializer = require('../DatabaseLayer/UserRepository');
 
 const BasicInfoLogic = require('./BasicInfoLogic');
 const ExtraInfoLogic = require('./ExtraInfoLogic');

@@ -1,5 +1,5 @@
-const OperationUnsuccessfulException = require('../Exceptions/OperationUnsuccessfulException');
-const ProviderNotFoundException = require('../Exceptions/ProviderNotFoundException');
+const OperationUnsuccessfulException = require('../Errors/OperationUnsuccessfulException');
+const ProviderNotFoundException = require('../Errors/ProviderNotFoundException');
 
 const getCertificationsMethods = (db) => {
     const getOutsideCertificationsProvider = async (db, dbId) => {

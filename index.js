@@ -1,6 +1,6 @@
-const { app }  = require('./app');
+const app = require('./app');
 
-const port = 8081;
+const port = 8082;
 
 // connectDb();
 app.listen(

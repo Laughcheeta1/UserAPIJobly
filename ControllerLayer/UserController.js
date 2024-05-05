@@ -1,7 +1,7 @@
 router = require('express').Router();
 trycatch = require('../utils/tryCatch');
 
-serviceInitializer = require('../ServiceLayer/RegisterService');
+serviceInitializer = require('../ServiceLayer/UserService');
 
 const NoExtraInfoProvidedException = require('../Errors/NoExtraInfoProvidedException');
 const NoCertificationProvidedException = require('../Errors/NoCertificationProvidedException');
