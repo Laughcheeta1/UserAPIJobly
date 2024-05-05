@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const InvalidAccessTokenException = require('../Errors/InvalidAccessTokenException');
 const NonExistingAccessTokenException = require('../Errors/NonExistingAccessTokenException');
+const NoIdentificationException = require('../Errors/NoIdentificationException');
 
 const verifyAccessToken = (req, res, next) => {
     const token = req.cookies['A_Token']; // Get the access token from the cookies
@@ -15,6 +16,9 @@ const verifyAccessToken = (req, res, next) => {
         (err, decoded) => {
             if (err) 
                 throw new InvalidAccessTokenException(); //invalid token
+
+            if (!decoded.dbId)
+                throw new NoIdentificationException();
 
             req.dbId = decoded.dbId;
             req.email = decoded.email;
