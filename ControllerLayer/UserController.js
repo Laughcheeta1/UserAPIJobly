@@ -20,7 +20,7 @@ serviceInitializer().then((service) => {
 
     // EXTRA INFO
     router.get("/Provider/extraInfo", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getExtraInfoProvider(req.dbId, req.body));
+        res.status(200).json(await service.getExtraInfoProvider(req.dbId));
     }));
 
     router.post("/Provider/extraInfo", trycatch(async (req, res, next) => {
