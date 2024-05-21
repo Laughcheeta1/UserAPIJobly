@@ -24,10 +24,10 @@ serviceInitializer().then((service) => {
     }));
 
     router.post("/Provider/extraInfo", trycatch(async (req, res, next) => {
-        if (!req.extraInfo)
+        if (!req.body.extraInfo)
             throw new NoExtraInfoProvidedException();
 
-        await service.addExtraInfoProvider(req.dbId, req.extraInfo);
+        await service.addExtraInfoProvider(req.dbId, req.body.extraInfo);
         res.status(201).send();
     }));
 
@@ -38,10 +38,10 @@ serviceInitializer().then((service) => {
     }));
 
     router.post("/Provider/certifications", trycatch(async (req, res, next) => {
-        if (!req.certification)
+        if (!req.body.certification)
             throw new NoCertificationProvidedException();
 
-        await service.addCertificationProvider(req.dbId, req.certification);
+        await service.addCertificationProvider(req.dbId, req.body.certification);
         res.status(201).send();
     }));
 
