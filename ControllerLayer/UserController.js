@@ -10,75 +10,75 @@ const NoReviewProvidedException = require('../Errors/NoReviewProvidedException')
 serviceInitializer().then((service) => {
     // BASIC INFO
     router.get('/Provider/basicInfo', trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getBasicInfoProvider(req.dbId));
+        res.status(200).json(await service.getBasicInfoProvider(req.body.dbId));
     }));
 
     router.get('/Employer/basicInfo', trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getBasicInfoEmployer(req.dbId));
+        res.status(200).json(await service.getBasicInfoEmployer(req.body.dbId));
     }));
 
 
     // EXTRA INFO
     router.get("/Provider/extraInfo", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getExtraInfoProvider(req.dbId));
+        res.status(200).json(await service.getExtraInfoProvider(req.body.dbId));
     }));
 
     router.post("/Provider/extraInfo", trycatch(async (req, res, next) => {
         if (!req.body.extraInfo)
             throw new NoExtraInfoProvidedException();
 
-        await service.addExtraInfoProvider(req.dbId, req.body.extraInfo);
+        await service.addExtraInfoProvider(req.body.dbId, req.body.extraInfo);
         res.status(201).send();
     }));
 
     
     // CERTIFICATIONS
     router.get("/Provider/certifications", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getCertificationsProvider(req.dbId));
+        res.status(200).json(await service.getCertificationsProvider(req.body.dbId));
     }));
 
     router.post("/Provider/certifications", trycatch(async (req, res, next) => {
         if (!req.body.certification)
             throw new NoCertificationProvidedException();
 
-        await service.addCertificationProvider(req.dbId, req.body.certification);
+        await service.addCertificationProvider(req.body.dbId, req.body.certification);
         res.status(201).send();
     }));
 
 
     // REVIEWS
     router.get("/Provider/reviews", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getReviewsProvider(req.dbId));
+        res.status(200).json(await service.getReviewsProvider(req.body.dbId));
     }));
 
     router.get("/Employer/reviews", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getReviewsEmployer(req.dbId));
+        res.status(200).json(await service.getReviewsEmployer(req.body.dbId));
     }));
 
     router.post("/Provider/reviews", trycatch(async (req, res, next) => {
-        if (!req.review)
+        if (!req.body.review)
             throw new NoReviewProvidedException();
 
-        await service.addReviewProvider(req.dbId, req.review);
+        await service.addReviewProvider(req.body.dbId, req.body.review);
         res.status(201).send();
     }));
 
     router.post("/Employer/reviews", trycatch(async (req, res, next) => {
-        if (!req.review)
+        if (!req.body.review)
             throw new NoReviewProvidedException();
 
-        await service.addReviewEmployer(req.dbId, req.review);
+        await service.addReviewEmployer(req.body.dbId, req.body.review);
         res.status(201).send();
     }));
 
 
     // SERVICES
     router.get("/Provider/postulatedServices", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getJoinedOfferingsProvider(req.dbId));
+        res.status(200).json(await service.getJoinedOfferingsProvider(req.body.dbId));
     }));
 
     router.get("/Employer/publishedServices", trycatch(async (req, res, next) => {
-        res.status(200).json(await service.getMadeOfferingsEmployer(req.dbId));
+        res.status(200).json(await service.getMadeOfferingsEmployer(req.body.dbId));
     }));
 });
 

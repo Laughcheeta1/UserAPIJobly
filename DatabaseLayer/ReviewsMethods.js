@@ -13,7 +13,10 @@ const getReviewsMethods = (db) => {
     };
 
     const addReviewProvider = async (db, dbId, review) => {
-        const counter = await db.collection('Provider').findOne(
+        let counter;
+
+        try {
+        counter = (await db.collection('Provider').findOne(
             { "dbId" : dbId },
             { 
                 "projection": 
@@ -22,9 +25,14 @@ const getReviewsMethods = (db) => {
                                         // in the db, otherwise mongo would think that we are trying to get the size of a string
                 } 
             }
-        );  // This is for the id of the new review
-
-        const result = await db.collection('Provider').updateOne(
+        )).count;  // This is for the id of the new review
+    }
+    catch (error)  // In case there is no reviews yet
+    {
+        counter = 0;    
+    }
+     
+    const result = await db.collection('Provider').updateOne(
                 { "dbId" : dbId }, 
                 { "$push": 
                     { 
@@ -65,16 +73,24 @@ const getReviewsMethods = (db) => {
     };
 
     const addReviewEmployer = async (db, dbId, review) => {
-        const counter = await db.collection('Employer').findOne(
-            { "dbId" : dbId },
-            { 
-                "projection": 
+       let counter;
+
+        try {
+            counter = (await db.collection('Employer').findOne(
+                { "dbId" : dbId },
                 { 
-                    "count" : { "$size" : "$reviews" }  // the $ operator in `$reviews` is used to refer to the field `reviews` 
-                                        // in the db, otherwise mongo would think that we are trying to get the size of a string
-                } 
-            }
-        );  // This is for the id of the new review
+                    "projection": 
+                    { 
+                        "count" : { "$size" : "$reviews" }  // the $ operator in `$reviews` is used to refer to the field `reviews` 
+                                            // in the db, otherwise mongo would think that we are trying to get the size of a string
+                    } 
+                }
+            )).count;  // This is for the id of the new review
+        }
+        catch (error)  // In case there is no reviews yet
+        {
+            counter = 0;
+        }
 
         const result = await db.collection('Employer').updateOne(
                 { "dbId" : dbId }, 

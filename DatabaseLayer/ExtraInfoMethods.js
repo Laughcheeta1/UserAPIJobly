@@ -27,7 +27,7 @@ const getExtraInfoMethods = (db) => {
                 }
             )).count;  // This is for the id of the new extra info
         }
-        catch (error)
+        catch (error) // In case there is no extra info yet
         {
             counter = 0;
         }

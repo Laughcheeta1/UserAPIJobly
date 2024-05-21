@@ -13,17 +13,23 @@ const getCertificationsMethods = (db) => {
     };
 
     const addOutsideCertificationProvider = async (db, dbId, certification) => {
-        const counter = await db.collection('Provider').findOne(
-            { "dbId" : dbId },
-            { 
-                "projection": 
+        let counter;
+        try {    
+            counter = (await db.collection('Provider').findOne(
+                { "dbId" : dbId },
                 { 
-                    "count" : { "$size" : "$outside_certifications" }  // the $ operator in `$outside_certifications` is used to refer to the field `outside_certifications` 
-                                        // in the db, otherwise mongo would think that we are trying to get the size of a string
-                } 
-            }
-        );  // This is for the id of the new outside certification
-
+                    "projection": 
+                    { 
+                        "count" : { "$size" : "$outside_certifications" }  // the $ operator in `$outside_certifications` is used to refer to the field `outside_certifications` 
+                                            // in the db, otherwise mongo would think that we are trying to get the size of a string
+                    } 
+                }
+            )).count;  // This is for the id of the new outside certification
+        }
+        catch (error) // In case there is no outside certification yet
+        {
+            counter = 0;
+        }
         const result = await db.collection('Provider').updateOne(
                 { "dbId" : dbId }, 
                 { "$push": 
@@ -40,9 +46,6 @@ const getCertificationsMethods = (db) => {
                 }
         );
 
-        if (result.result.ok !== 1)
-            throw new OperationUnsuccessfulException();
-        
         if (result.matchedCount === 0)
             throw new ProviderNotFoundException();
 

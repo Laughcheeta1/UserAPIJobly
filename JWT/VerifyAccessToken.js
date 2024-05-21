@@ -21,9 +21,9 @@ const verifyAccessToken = (req, res, next) => {
             if (!decoded.dbId)
                 throw new NoIdentificationException();
 
-            req.dbId = decoded.dbId;
-            req.email = decoded.email;
-            req.role = decoded.role;
+            req.body.dbId = decoded.dbId;
+            req.body.email = decoded.email;
+            req.body.role = decoded.role;
             next();
         }
     );
