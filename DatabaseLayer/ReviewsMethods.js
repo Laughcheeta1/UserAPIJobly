@@ -3,7 +3,7 @@ const EmployerNotFoundException = require('../Errors/EmployerNotFoundException')
 const OperationUnsuccessfulException = require('../Errors/OperationUnsuccessfulException');
 
 const getReviewsMethods = (db) => {
-    const getReviewsProvider = async (db, dbId) => {
+    const getReviewsProvider = async (dbId) => {
         return await db.collection('Provider').findOne(
             { "dbId" : dbId }, 
             { 
@@ -12,7 +12,7 @@ const getReviewsMethods = (db) => {
             });  // TODO: Make this not to return the id of the reviews, but only the author, date, etc.
     };
 
-    const addReviewProvider = async (db, dbId, review) => {
+    const addReviewProvider = async (dbId, review) => {
         let counter;
 
         try {
@@ -63,7 +63,7 @@ const getReviewsMethods = (db) => {
     
     // EMPLOYER
 
-    const getReviewsEmployer = async (db, dbId) => {
+    const getReviewsEmployer = async (dbId) => {
         return await db.collection('Employer').findOne(
             { "dbId" : dbId }, 
             { 
@@ -72,7 +72,7 @@ const getReviewsMethods = (db) => {
             });  // TODO: Make this not to return the id of the reviews, but only the author, date, etc.
     };
 
-    const addReviewEmployer = async (db, dbId, review) => {
+    const addReviewEmployer = async (dbId, review) => {
        let counter;
 
         try {

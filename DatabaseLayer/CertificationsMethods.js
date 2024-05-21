@@ -2,7 +2,7 @@ const OperationUnsuccessfulException = require('../Errors/OperationUnsuccessfulE
 const ProviderNotFoundException = require('../Errors/ProviderNotFoundException');
 
 const getCertificationsMethods = (db) => {
-    const getOutsideCertificationsProvider = async (db, dbId) => {
+    const getOutsideCertificationsProvider = async (dbId) => {
         const outsideCertifications = await db.collection('Provider').findOne(
             { "dbId" : dbId }, 
             { 
@@ -12,7 +12,7 @@ const getCertificationsMethods = (db) => {
         return outsideCertifications;
     };
 
-    const addOutsideCertificationProvider = async (db, dbId, certification) => {
+    const addOutsideCertificationProvider = async (dbId, certification) => {
         let counter;
         try {    
             counter = (await db.collection('Provider').findOne(

@@ -5,7 +5,7 @@ const ProviderNotFoundException = require('../Errors/ProviderNotFoundException')
 const getServicesMethods = (db) => {
     // TODO: the ContractApi should be the one that adds a service the provider has joined to the list of joined services.
     // That way we can make sure that service is indeed added to the list and everything is consistent.
-    const getJoinedOfferingsProvider = async (db, dbId) => {
+    const getJoinedOfferingsProvider = async (dbId) => {
         const services = await db.collection('Provider').findOne(
             { "dbId" : dbId }, 
             { 
@@ -15,7 +15,7 @@ const getServicesMethods = (db) => {
         return services;
     };
 
-    const getMadeOfferingsEmployer = async (db, dbId) => {
+    const getMadeOfferingsEmployer = async (dbId) => {
         const services = await db.collection('Employer').findOne(
             { "dbId" : dbId }, 
             { 

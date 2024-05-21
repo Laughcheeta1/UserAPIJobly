@@ -13,9 +13,21 @@ serviceInitializer().then((service) => {
         res.status(200).json(await service.getBasicInfoProvider(req.body.dbId));
     }));
 
+    router.put('/Provider/basicInfo', trycatch(async (req, res, next) => {
+        await service.updateBasicInfoProvider(req.body.dbId, req.body.infoToUpdate);
+        res.status(200).send();
+    }));
+
     router.get('/Employer/basicInfo', trycatch(async (req, res, next) => {
         res.status(200).json(await service.getBasicInfoEmployer(req.body.dbId));
     }));
+
+    router.put('/Employer/basicInfo', trycatch(async (req, res, next) => {
+        await service.updateBasicInfoEmployer(req.body.dbId, req.body.infoToUpdate);
+        res.status(200).send();
+    }));
+
+    
 
 
     // EXTRA INFO

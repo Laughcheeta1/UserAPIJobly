@@ -1,12 +1,37 @@
 const getBasicInfoMethods = (db) => {
-    const getBasicInfoProvider = async (db, dbId) => {
+    const getBasicInfoProvider = async (dbId) => {
         const basicInfo = await db.collection('Provider').findOne({ dbId : dbId }, { projection: { name : 1, phone_number : 1, email : 1 } });
         return basicInfo;
     };
 
-    const getBasicInfoEmployer = async (db, dbId) => {
+
+    const updateBasicInfoProvider = async (dbId, infoToUpdate) => {
+        await db.collection('Provider').updateOne(
+            { dbId : dbId },
+            { $set: 
+                {
+                    ...infoToUpdate
+                }
+            }
+        );
+    };
+
+
+    const getBasicInfoEmployer = async (dbId) => {
         const basicInfo = await db.collection('Employer').findOne({ dbId : dbId }, { projection: { name : 1, phone_number : 1, email : 1 } });
         return basicInfo;
+    };
+
+
+    const updateBasicInfoEmployer = async (dbId, infoToUpdate) => {
+        await db.collection('Employer').updateOne(
+            { dbId : dbId },
+            { $set: 
+                {
+                    ...infoToUpdate
+                }
+            }
+        );
     };
 
     // The Basic info cannot be deleted, nor new basic info can be created
@@ -15,7 +40,9 @@ const getBasicInfoMethods = (db) => {
 
     return {
         getBasicInfoProvider,
-        getBasicInfoEmployer
+        updateBasicInfoProvider,
+        getBasicInfoEmployer,
+        updateBasicInfoEmployer
     };
 };
 
