@@ -16,7 +16,7 @@ const getExtraInfoMethods = (db) => {
     const addExtraInfoProvider = async (dbId, extraInfo) => {
         let counter;
         try {
-            counter = await db.collection('Provider').findOne(
+            counter = (await db.collection('Provider').findOne(
                 { "dbId" : dbId },
                 { 
                     "projection": 
@@ -25,7 +25,7 @@ const getExtraInfoMethods = (db) => {
                                             // in the db, otherwise mongo would think that we are trying to get the size of a string
                     } 
                 }
-            );  // This is for the id of the new extra info
+            )).count;  // This is for the id of the new extra info
         }
         catch (error)
         {
