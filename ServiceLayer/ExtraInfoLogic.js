@@ -6,6 +6,7 @@ const getExtraInfoLogic = (repository) => {
     };
 
     const addExtraInfoProvider = async (dbId, extraInfo) => {
+        console.log(extraInfo)
         if (!extraInfo.name)
             throw new InvalidExtraInfoException("No name for the extra info was provided");
 

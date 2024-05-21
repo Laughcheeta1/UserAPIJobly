@@ -2,29 +2,36 @@ const ProviderNotFoundException = require('../Errors/ProviderNotFoundException')
 const OperationUnsuccessfulException = require('../Errors/OperationUnsuccessfulException');
 
 const getExtraInfoMethods = (db) => {
-    const getExtraInfoProvider = async (db, dbId) => {
+    const getExtraInfoProvider = async (dbId) => {
         // TODO: change this in a way that it first returns only 5, then the rest, etc.
         const extraInfo = await db.collection('Provider').findOne(
             { "dbId" : dbId }, 
             { 
                 "projection": 
-                { "extra_info" : 1 } 
+                { "extra_info" : 1 }    
             });  // TODO: Make this not to return the id of the extra info, but only the name and description
         return extraInfo;
     };
 
-    const addExtraInfoProvider = async (db, dbId, extraInfo) => {
-        const counter = await db.collection('Provider').findOne(
-            { "dbId" : dbId },
-            { 
-                "projection": 
+    const addExtraInfoProvider = async (dbId, extraInfo) => {
+        let counter;
+        try {
+            counter = (await db.collection('Provider').findOne(
+                { "dbId" : dbId },
                 { 
-                    "count" : { "$size" : "$extra_info" }  // the $ operator in `$extra_info` is used to refer to the field `extra_info` 
-                                        // in the db, otherwise mongo would think that we are trying to get the size of a string
-                } 
-            }
-        );  // This is for the id of the new extra info
-
+                    "projection": 
+                    { 
+                        "count" : { "$size" : "$extra_info" }  // the $ operator in `$extra_info` is used to refer to the field `extra_info` 
+                                            // in the db, otherwise mongo would think that we are trying to get the size of a string
+                    } 
+                }
+            )).count;  // This is for the id of the new extra info
+        }
+        catch (error)
+        {
+            counter = 0;
+        }
+            
         const result = await db.collection('Provider').updateOne(
                 { "dbId" : dbId }, 
                 { "$push": 
@@ -37,9 +44,6 @@ const getExtraInfoMethods = (db) => {
                     } 
                 } 
             });
-        
-        if (result.result.ok !== 1)
-            throw new OperationUnsuccessfulException();
     
         if (result.matchedCount === 0) 
             throw new ProviderNotFoundException();

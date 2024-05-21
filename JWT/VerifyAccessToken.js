@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const InvalidAccessTokenException = require('../Errors/InvalidAccessTokenException');
 const NonExistingAccessTokenException = require('../Errors/NonExistingAccessTokenException');
 const NoIdentificationException = require('../Errors/NoIdentificationException');
+require('dotenv').config();
 
 const verifyAccessToken = (req, res, next) => {
     const token = req.cookies['A_Token']; // Get the access token from the cookies
