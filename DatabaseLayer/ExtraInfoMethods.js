@@ -2,18 +2,18 @@ const ProviderNotFoundException = require('../Errors/ProviderNotFoundException')
 const OperationUnsuccessfulException = require('../Errors/OperationUnsuccessfulException');
 
 const getExtraInfoMethods = (db) => {
-    const getExtraInfoProvider = async (db, dbId) => {
+    const getExtraInfoProvider = async (dbId) => {
         // TODO: change this in a way that it first returns only 5, then the rest, etc.
         const extraInfo = await db.collection('Provider').findOne(
             { "dbId" : dbId }, 
             { 
                 "projection": 
-                { "extra_info" : 1 } 
+                { "extra_info" : 1 }    
             });  // TODO: Make this not to return the id of the extra info, but only the name and description
         return extraInfo;
     };
 
-    const addExtraInfoProvider = async (db, dbId, extraInfo) => {
+    const addExtraInfoProvider = async (dbId, extraInfo) => {
         const counter = await db.collection('Provider').findOne(
             { "dbId" : dbId },
             { 
