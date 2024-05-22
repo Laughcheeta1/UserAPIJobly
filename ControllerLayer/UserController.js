@@ -43,6 +43,11 @@ serviceInitializer().then((service) => {
         res.status(201).send();
     }));
 
+    router.put('/Provider/extraInfo', trycatch(async (req, res, next) => {
+        await service.updateExtraInfoProvider(req.body.dbId, req.body.infoToUpdate);
+        res.status(200).send();
+    }));
+
     
     // CERTIFICATIONS
     router.get("/Provider/certifications", trycatch(async (req, res, next) => {

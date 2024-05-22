@@ -1,6 +1,6 @@
 const getBasicInfoMethods = (db) => {
     const getBasicInfoProvider = async (dbId) => {
-        const basicInfo = await db.collection('Provider').findOne({ dbId : dbId }, { projection: { name : 1, phone_number : 1, email : 1 } });
+        const basicInfo = await db.collection('Provider').findOne({ dbId : dbId }, { projection: { name : 1, phone : 1, email : 1 } });
         return basicInfo;
     };
 

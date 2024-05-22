@@ -16,9 +16,15 @@ const getExtraInfoLogic = (repository) => {
         return await repository.addExtraInfoProvider(dbId, extraInfo);
     }
 
+    const updateExtraInfoProvider = async (dbId, infoToUpdate) => {
+        console.log("entra")
+        await repository.updateExtraInfoProvider(dbId, infoToUpdate);
+    };
+
     return {
         getExtraInfoProvider,
-        addExtraInfoProvider
+        addExtraInfoProvider,
+        updateExtraInfoProvider
     };
 };
 

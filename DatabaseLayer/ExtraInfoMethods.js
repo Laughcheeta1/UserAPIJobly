@@ -56,11 +56,25 @@ const getExtraInfoMethods = (db) => {
     };
 
     // TODO: add a method to update the extra info
+    const updateExtraInfoProvider = async (dbId, infoToUpdate) => {
+        console.log(dbId)
+        console.log(infoToUpdate)
+        await db.collection('Provider').updateOne(
+            { dbId : dbId },
+            { $set: 
+                {
+                    extra_info: infoToUpdate
+                }
+            }
+        );
+    };
+
     // TODO: add a method to delete the extra info
     
     return {    
         getExtraInfoProvider,
-        addExtraInfoProvider
+        addExtraInfoProvider,
+        updateExtraInfoProvider
     };
 };
 
