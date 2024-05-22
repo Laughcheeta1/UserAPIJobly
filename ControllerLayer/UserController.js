@@ -48,6 +48,11 @@ serviceInitializer().then((service) => {
         res.status(200).send();
     }));
 
+    router.put('/Provider/delete/extraInfo', trycatch(async (req, res, next) => {
+        await service.deleteExtraInfoProvider(req.body.dbId, req.body.info_id);
+        res.status(200).send();
+    }));
+
     
     // CERTIFICATIONS
     router.get("/Provider/certifications", trycatch(async (req, res, next) => {

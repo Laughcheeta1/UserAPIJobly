@@ -17,14 +17,18 @@ const getExtraInfoLogic = (repository) => {
     }
 
     const updateExtraInfoProvider = async (dbId, infoToUpdate) => {
-        console.log("entra")
         await repository.updateExtraInfoProvider(dbId, infoToUpdate);
+    };
+
+    const deleteExtraInfoProvider = async (dbId, info_id) => {
+        await repository.deleteExtraInfoProvider(dbId, info_id);
     };
 
     return {
         getExtraInfoProvider,
         addExtraInfoProvider,
-        updateExtraInfoProvider
+        updateExtraInfoProvider,
+        deleteExtraInfoProvider
     };
 };
 
