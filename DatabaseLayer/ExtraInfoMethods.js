@@ -15,7 +15,7 @@ const getExtraInfoMethods = (db) => {
 
     const getMaxInfoId = async (dbId) => {
         const { extra_info } = await getExtraInfoProvider(dbId)
-        if (extra_info.length === 0) return 0;
+        if (!extra_info || extra_info.length === 0) return 0;
     
         return extra_info.reduce((max, current) => {
             return current.info_id > max ? current.info_id : max;
